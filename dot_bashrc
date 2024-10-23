@@ -134,4 +134,8 @@ esac
 
 alias nvim='nvim --listen /tmp/nvim-server.pipe'
 
+echo >> /home/danielelegbe/.bashrc
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/danielelegbe/.bashrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
