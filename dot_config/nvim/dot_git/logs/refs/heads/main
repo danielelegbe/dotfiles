@@ -1,7 +1,0 @@
-0000000000000000000000000000000000000000 1a0bdff34fb0aa356fefa6c5b2779c39cb6c96d7 danielelegbe <danielelegbe@DESKTOP-113QC0U> 1729558649 +0100	clone: from https://github.com/danielelegbe/nvim-config
-1a0bdff34fb0aa356fefa6c5b2779c39cb6c96d7 bffe10b8cf1e285774046c4b755b2ed47e958d52 Daniel Elegbe <daniel_elegbe@hotmail.co.uk> 1729561545 +0100	commit: Add additional keymaps
-bffe10b8cf1e285774046c4b755b2ed47e958d52 7ef632a28d8ec19083f88737ad62b697c843596b Daniel Elegbe <daniel_elegbe@hotmail.co.uk> 1729620224 +0100	commit: json server and stop quitting from ctrl + z
-7ef632a28d8ec19083f88737ad62b697c843596b bffe10b8cf1e285774046c4b755b2ed47e958d52 Daniel Elegbe <daniel_elegbe@hotmail.co.uk> 1729620272 +0100	reset: moving to bffe10b8cf1e285774046c4b755b2ed47e958d52
-bffe10b8cf1e285774046c4b755b2ed47e958d52 c2466f17b33da10549da89771308b14cf7ec7e6f Daniel Elegbe <daniel_elegbe@hotmail.co.uk> 1729620293 +0100	pull --no-edit: Fast-forward
-c2466f17b33da10549da89771308b14cf7ec7e6f 8745a492d349778a773f1f6c23ec804317affb0f Daniel Elegbe <daniel_elegbe@hotmail.co.uk> 1729620374 +0100	commit: Resolve conflicts
-8745a492d349778a773f1f6c23ec804317affb0f e29f6260c4e41a306aa9eab3e081ad9f465c35e7 Daniel Elegbe <daniel_elegbe@hotmail.co.uk> 1729680799 +0100	commit (merge): Merge branch 'main' of https://github.com/danielelegbe/nvim-config
