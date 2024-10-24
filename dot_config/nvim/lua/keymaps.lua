@@ -6,9 +6,6 @@ vim.api.nvim_set_keymap("i", "jk", "<Esc>", opts)
 -- Remove search highlighting when you escape
 vim.api.nvim_set_keymap("n", "<Esc>", "<cmd>nohlsearch<CR>", opts)
 
--- Open diagnostic quickfix list
-vim.keymap.set("n", "<leader>qq", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
 -- Save file
 vim.keymap.set("n", "<C-s>", ":w<CR>", opts)
 

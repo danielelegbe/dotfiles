@@ -9,6 +9,32 @@ return {
 		"nvim-neotest/neotest-jest",
 	},
 	config = function()
+		-- Function to find the correct Vitest config file and working directory
+		local find_vitest_config_file_and_cwd = function(file)
+			if string.find(file, "/server/") then
+				return vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src") .. "vitest.config.ts",
+					vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src")
+			elseif string.find(file, "/client/") then
+				return vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src") .. "vite.config.ts",
+					vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src")
+			else
+				return nil, vim.fn.getcwd() -- Return current working directory if not in client/server
+			end
+		end
+
+		-- Helper to run tests with dynamic Vitest config file and working directory
+		local run_tests = function()
+			local file = vim.fn.expand("%:p") -- Get the full path of the current file
+			local config, cwd = find_vitest_config_file_and_cwd(file) -- Find the correct vitest config file and cwd
+
+			if config and vim.fn.filereadable(config) == 1 then
+				require("neotest").run.run({ extra_args = { "--config", config }, cwd = cwd })
+			else
+				-- If config isn't found, run tests in the current working directory
+				require("neotest").run.run({ cwd = cwd })
+			end
+		end
+
 		require("neotest").setup({
 			adapters = {
 				require("neotest-jest"),
@@ -16,23 +42,16 @@ return {
 					filter_dir = function(name)
 						return name ~= "node_modules"
 					end,
-					vitest_cmd = function()
-						return "pnpm test"
-					end,
 				}),
 			},
 		})
-		vim.api.nvim_set_keymap(
-			"n",
-			"<leader>tr",
-			"<cmd>lua require('neotest').run.run()<CR>",
-			{ noremap = true, silent = true, desc = "Run Tests" }
-		)
-		vim.api.nvim_set_keymap(
-			"n",
-			"<leader>ts",
-			"<cmd>lua require('neotest').summary.toggle()<CR>",
-			{ noremap = true, silent = true, desc = "Open Test Summary" }
-		)
+
+		-- Keymap for running tests with dynamic config and working directory
+		vim.keymap.set("n", "<leader>tr", run_tests, { noremap = true, silent = true, desc = "Run Tests" })
+
+		-- Keymap for toggling the test summary
+		vim.keymap.set("n", "<leader>ts", function()
+			require("neotest").summary.toggle()
+		end, { noremap = true, silent = true, desc = "Open Test Summary" })
 	end,
 }
