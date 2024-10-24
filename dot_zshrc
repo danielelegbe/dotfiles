@@ -65,4 +65,7 @@ else
     export EDITOR="nvim"
 fi
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
+  # We are in WSL, run the brew shellenv command
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
