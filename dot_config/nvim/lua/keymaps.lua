@@ -8,6 +8,7 @@ vim.api.nvim_set_keymap("n", "<Esc>", "<cmd>nohlsearch<CR>", opts)
 
 -- Save file
 vim.keymap.set("n", "<C-s>", ":w<CR>", opts)
+vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>", opts)
 
 -- Delete single character without adding to the register
 vim.keymap.set("n", "x", '"_x', opts)
