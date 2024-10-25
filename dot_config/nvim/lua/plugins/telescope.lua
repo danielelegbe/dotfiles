@@ -1,6 +1,3 @@
-local harpoon = require("harpoon")
-harpoon:setup({})
-
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -24,6 +21,25 @@ return {
 						"yarn%.lock",
 						"package-lock%.json",
 						"pnpm-lock%.yaml",
+					},
+				},
+				pickers = {
+					find_files = {
+						theme = "dropdown",
+					},
+					live_grep = {
+						theme = "dropdown",
+					},
+					oldfiles = {
+						theme = "dropdown",
+					},
+					buffers = {
+						theme = "dropdown",
+						mappings = {
+							n = {
+								["dd"] = require("telescope.actions").delete_buffer,
+							},
+						},
 					},
 				},
 			})
@@ -52,6 +68,7 @@ return {
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+
 			vim.keymap.set("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
