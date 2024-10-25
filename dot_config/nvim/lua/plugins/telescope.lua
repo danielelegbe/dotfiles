@@ -15,6 +15,13 @@ return {
 					layout_config = {
 						width = 0.95,
 					},
+					file_ignore_patterns = {
+						"node_modules",
+						"dist",
+						"yarn%.lock",
+						"package-lock%.json",
+						"pnpm-lock%.yaml",
+					},
 				},
 			})
 
