@@ -52,11 +52,8 @@ vim.keymap.set("n", "<Right>", function()
 end, opts)
 
 -- Buffers
-vim.keymap.set("n", "<Tab>", ":bnext<CR>", opts)
-vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", opts)
-vim.keymap.set("n", "<leader>qb", ":Bdelete!<CR>", { silent = true, noremap = true, desc = "[q]uit [b]uffer" })
+vim.keymap.set("n", "<leader>qb", ":bd<CR>", { silent = true, noremap = true, desc = "[q]uit [b]uffer" })
 vim.keymap.set("n", "<leader>qB", ":%bd|e#|bd#<CR>", { silent = true, noremap = true, desc = "[q]uit Other [B]uffers" })
-vim.keymap.set("n", "<leader>b", "<cmd> enew <CR>", { silent = true, noremap = true, desc = "New [B]uffer" })
 
 -- Window management
 vim.keymap.set("n", "<leader>ww", "<C-w>v", { silent = true, noremap = true, desc = "Split [W]indow Vertically" })

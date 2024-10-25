@@ -26,6 +26,9 @@ return {
 		require("luasnip.loaders.from_vscode").lazy_load()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
+		local neotab = require("neotab")
+		local suggestion = require("supermaven-nvim.completion_preview")
+
 		luasnip.config.setup({})
 
 		cmp.setup({
@@ -60,6 +63,16 @@ return {
 				--  completions whenever it has completion options available.
 				["<C-Space>"] = cmp.mapping.complete({}),
 
+				["<Tab>"] = function()
+					if luasnip.expandable() then
+						luasnip.expand()
+					elseif suggestion.has_suggestion() then
+						suggestion.on_accept_suggestion()
+					else
+						neotab.tabout()
+					end
+				end,
+				--
 				-- Think of <c-l> as moving to the right of your snippet expansion.
 				--  So if you have a snippet that's like:
 				--  function $name($args)

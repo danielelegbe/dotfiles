@@ -20,5 +20,6 @@ if vim.fn.has("nvim") == 1 and vim.fn.executable("nvr") == 1 then
 end
 
 require("vim-options")
+require("health")
 require("keymaps")
 require("lazy").setup("plugins")

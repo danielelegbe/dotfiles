@@ -19,5 +19,6 @@ return {
 
 		vim.keymap.set("n", "<leader>n", "<cmd>Neotree toggle reveal<CR>", { desc = "Show file in NeoTree" })
 		vim.keymap.set("n", "<C-n>", "<cmd>Neotree toggle reveal<CR>")
+		vim.keymap.set("n", "<C-e>", "<cmd>Neotree toggle reveal<CR>")
 	end,
 }

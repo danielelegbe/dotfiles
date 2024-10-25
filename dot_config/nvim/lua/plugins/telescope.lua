@@ -1,3 +1,6 @@
+local harpoon = require("harpoon")
+harpoon:setup({})
+
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -45,6 +48,13 @@ return {
 					prompt_title = "Search in Current Buffer",
 				})
 			end, { desc = "Search [/] in current file" })
+
+			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+
+			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+			vim.keymap.set("n", "<leader>sn", function()
+				builtin.find_files({ cwd = vim.fn.stdpath("config") })
+			end, { desc = "[S]earch [N]eovim files" })
 		end,
 	},
 }
