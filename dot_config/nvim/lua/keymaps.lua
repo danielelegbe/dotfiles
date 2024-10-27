@@ -21,6 +21,11 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", opts)
 vim.keymap.set("n", "n", "nzzzv", opts)
 vim.keymap.set("n", "N", "Nzzzv", opts)
 
+vim.keymap.set("n", "J", "5j", opts)
+vim.keymap.set("n", "K", "5k", opts)
+
+-- Jump lines faster
+
 -- Resize with arrows
 -- Check to see if the current window is a float window
 local function resize_window(direction)
@@ -56,8 +61,8 @@ vim.keymap.set("n", "<leader>qb", ":bd<CR>", { silent = true, noremap = true, de
 vim.keymap.set("n", "<leader>qB", ":%bd|e#|bd#<CR>", { silent = true, noremap = true, desc = "[q]uit Other [B]uffers" })
 
 -- Window management
-vim.keymap.set("n", "<leader>ww", "<C-w>v", { silent = true, noremap = true, desc = "Split [W]indow Vertically" })
-vim.keymap.set("n", "<leader>h", "<C-w>s", { silent = true, noremap = true, desc = "Split Window [H]orizontally" })
+vim.keymap.set("n", "<leader>wv", "<C-w>v", { silent = true, noremap = true, desc = "Split [W]indow Vertically" })
+vim.keymap.set("n", "<leader>wh", "<C-w>s", { silent = true, noremap = true, desc = "Split Window [H]orizontally" })
 vim.keymap.set("n", "<leader>=", "<C-w>=", { silent = true, noremap = true, desc = "Balance Windows [=]" })
 vim.keymap.set("n", "<leader>qw", "<C-w>q", { silent = true, noremap = true, desc = "[q]uit [w]indow" })
 vim.keymap.set("n", "<leader>qW", "<C-w>o", { silent = true, noremap = true, desc = "[q]uit Other [W]indows" })

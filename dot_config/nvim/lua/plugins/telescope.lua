@@ -10,31 +10,18 @@ return {
 						require("telescope.themes").get_dropdown({}),
 					},
 				},
-				defaults = {
+				defaults = require("telescope.themes").get_dropdown({
 					path_display = { "truncate" },
-					layout_config = {
-						width = 0.95,
-					},
 					file_ignore_patterns = {
 						"node_modules",
 						"dist",
 						"yarn%.lock",
-						"package-lock%.json",
-						"pnpm-lock%.yaml",
+						"package%-lock.json",
+						"pnpm%-lock.yaml",
 					},
-				},
+				}),
 				pickers = {
-					find_files = {
-						theme = "dropdown",
-					},
-					live_grep = {
-						theme = "dropdown",
-					},
-					oldfiles = {
-						theme = "dropdown",
-					},
 					buffers = {
-						theme = "dropdown",
 						mappings = {
 							n = {
 								["dd"] = require("telescope.actions").delete_buffer,

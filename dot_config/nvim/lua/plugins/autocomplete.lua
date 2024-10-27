@@ -26,8 +26,6 @@ return {
 		require("luasnip.loaders.from_vscode").lazy_load()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
-		local neotab = require("neotab")
-		local suggestion = require("supermaven-nvim.completion_preview")
 
 		luasnip.config.setup({})
 
@@ -45,14 +43,13 @@ return {
 			-- No, but seriously. Please read `:help ins-completion`, it is really good!
 			mapping = cmp.mapping.preset.insert({
 				-- Select the [n]ext item
-				["<C-n>"] = cmp.mapping.select_next_item(),
+				["<C-j>"] = cmp.mapping.select_next_item(),
 				-- Select the [p]revious item
-				["<C-p>"] = cmp.mapping.select_prev_item(),
+				["<C-k>"] = cmp.mapping.select_prev_item(),
 
 				-- Scroll the documentation window [b]ack / [f]orward
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
-
 				-- Accept ([y]es) the completion.
 				--  This will auto-import if your LSP supports it.
 				--  This will expand snippets if the LSP sent a snippet.
@@ -62,16 +59,10 @@ return {
 				--  Generally you don't need this, because nvim-cmp will display
 				--  completions whenever it has completion options available.
 				["<C-Space>"] = cmp.mapping.complete({}),
+				["<C-c>"] = cmp.mapping.abort(),
+				["<C-u>"] = cmp.mapping.scroll_docs(4),
+				["<C-d>"] = cmp.mapping.scroll_docs(-4),
 
-				["<Tab>"] = function()
-					if luasnip.expandable() then
-						luasnip.expand()
-					elseif suggestion.has_suggestion() then
-						suggestion.on_accept_suggestion()
-					else
-						neotab.tabout()
-					end
-				end,
 				--
 				-- Think of <c-l> as moving to the right of your snippet expansion.
 				--  So if you have a snippet that's like:
@@ -95,16 +86,17 @@ return {
 				-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 				--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 			}),
-			sources = {
+			sources = cmp.config.sources({
 				{
 					name = "lazydev",
 					-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
 					group_index = 0,
 				},
 				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
-				{ name = "path" },
-			},
+				{ name = "buffer", max_item_count = 5 },
+				{ name = "path", max_item_count = 3 },
+				{ name = "luasnip", max_item_count = 3 },
+			}),
 		})
 	end,
 }
