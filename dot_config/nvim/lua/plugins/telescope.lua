@@ -4,6 +4,7 @@ return {
 		tag = "0.1.8",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
 		config = function()
+			local actions = require("telescope.actions")
 			require("telescope").setup({
 				extensions = {
 					["ui-select"] = {
@@ -19,12 +20,18 @@ return {
 						"package%-lock.json",
 						"pnpm%-lock.yaml",
 					},
+					mappings = {
+						i = {
+							["<C-j>"] = actions.move_selection_next,
+							["<C-k>"] = actions.move_selection_previous,
+						},
+					},
 				}),
 				pickers = {
 					buffers = {
 						mappings = {
 							n = {
-								["dd"] = require("telescope.actions").delete_buffer,
+								["dd"] = actions.delete_buffer,
 							},
 						},
 					},

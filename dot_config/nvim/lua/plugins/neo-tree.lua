@@ -8,6 +8,8 @@ return {
 	},
 	config = function()
 		require("neo-tree").setup({
+			close_if_last_window = true,
+			neo_tree_popup_input_ready = false,
 			event_handlers = {
 				event = "neo_tree_buffer_enter",
 				handler = function()
@@ -16,6 +18,10 @@ return {
 			},
 			filesystem = {
 				filtered_items = {
+					visible = false,
+					hide_dotfiles = false,
+					hide_gitignored = false,
+					hide_hidden = false,
 					always_show_by_pattern = {
 						".env*",
 					},

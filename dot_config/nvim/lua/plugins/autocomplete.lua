@@ -4,6 +4,15 @@ return {
 	dependencies = {
 		-- Snippet Engine & its associated nvim-cmp source
 		{
+			"folke/lazydev.nvim",
+			ft = "lua",
+			opts = {
+				library = {
+					{ path = "luvit-meta/library", words = { "vim%.uv" } },
+				},
+			},
+		},
+		{
 			"L3MON4D3/LuaSnip",
 			build = (function()
 				-- Build Step is needed for regex support in snippets.
