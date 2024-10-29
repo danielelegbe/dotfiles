@@ -9,6 +9,13 @@ vim.opt.updatetime = 250
 vim.opt.showmode = false
 vim.opt.mouse = "a"
 
+-- stops auto comments
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "*",
+	callback = function()
+		vim.opt_local.formatoptions:remove({ "r", "o" })
+	end,
+})
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.

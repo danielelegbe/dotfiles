@@ -4,15 +4,6 @@ return {
 	dependencies = {
 		-- Snippet Engine & its associated nvim-cmp source
 		{
-			"folke/lazydev.nvim",
-			ft = "lua",
-			opts = {
-				library = {
-					{ path = "luvit-meta/library", words = { "vim%.uv" } },
-				},
-			},
-		},
-		{
 			"L3MON4D3/LuaSnip",
 			build = (function()
 				-- Build Step is needed for regex support in snippets.
@@ -32,13 +23,29 @@ return {
 		"hrsh7th/cmp-path",
 	},
 	config = function()
-		require("luasnip.loaders.from_vscode").lazy_load()
 		local cmp = require("cmp")
+		require("luasnip.loaders.from_vscode").lazy_load()
 		local luasnip = require("luasnip")
-
 		luasnip.config.setup({})
 
 		cmp.setup({
+			formatting = {
+				format = function(_, vim_item)
+					if vim_item.menu ~= nil and string.len(vim_item.menu) > 20 then
+						vim_item.menu = string.sub(vim_item.menu, 1, 17) .. "..."
+					end
+
+					return vim_item
+				end,
+			},
+			performance = {
+				max_view_entries = 10,
+				timeout = 1,
+			},
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.disable,
+			},
 			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
@@ -69,8 +76,8 @@ return {
 				--  completions whenever it has completion options available.
 				["<C-Space>"] = cmp.mapping.complete({}),
 				["<C-c>"] = cmp.mapping.abort(),
-				["<C-u>"] = cmp.mapping.scroll_docs(4),
-				["<C-d>"] = cmp.mapping.scroll_docs(-4),
+				["<C-d>"] = cmp.mapping.scroll_docs(4),
+				["<C-u>"] = cmp.mapping.scroll_docs(-4),
 
 				--
 				-- Think of <c-l> as moving to the right of your snippet expansion.
@@ -96,11 +103,6 @@ return {
 				--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 			}),
 			sources = cmp.config.sources({
-				{
-					name = "lazydev",
-					-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-					group_index = 0,
-				},
 				{ name = "nvim_lsp" },
 				{ name = "buffer", max_item_count = 5 },
 				{ name = "path", max_item_count = 3 },
