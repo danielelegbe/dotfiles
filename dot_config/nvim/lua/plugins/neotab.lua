@@ -4,7 +4,6 @@ return {
 	opts = {
 		tabkey = "<Tab>",
 		act_as_tab = true,
-		behavior = "closing", ---@type ntab.behavior
 		pairs = { ---@type ntab.pair[]
 			{ open = "(", close = ")" },
 			{ open = "[", close = "]" },

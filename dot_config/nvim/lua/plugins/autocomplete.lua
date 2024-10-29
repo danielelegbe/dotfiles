@@ -30,6 +30,9 @@ return {
 		local luasnip = require("luasnip")
 		luasnip.config.setup({})
 
+		local neotab = require("neotab")
+		local suggestion = require("supermaven-nvim.completion_preview")
+
 		cmp.setup({
 			formatting = {
 				format = function(_, vim_item)
@@ -100,6 +103,14 @@ return {
 						luasnip.jump(-1)
 					end
 				end, { "i", "s" }),
+
+				["<Tab>"] = cmp.mapping(function()
+					if suggestion.has_suggestion() then
+						suggestion.on_accept_suggestion()
+					else
+						neotab.tabout()
+					end
+				end),
 
 				-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 				--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps

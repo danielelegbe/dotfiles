@@ -86,3 +86,6 @@ if ! grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
 fi
 
 alias lg="lazygit"
+
+eval "$(zoxide init --cmd cd zsh)"
+
