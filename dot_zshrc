@@ -39,7 +39,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 alias nvim='nvim --listen /tmp/nvim-server.pipe'
 
-# fzf
 # neovim-remote
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
     alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
@@ -58,11 +57,14 @@ if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-eval "$(starship init zsh)"
-
+# editor
 alias vim='nvim'
 alias inv='nvim $(fzf -m --preview="bat --color=always --style=numbers --line-range=:500 {}")'
+
+# fzf
+eval "$(starship init zsh)"
 source <(fzf --zsh)
+
 
 
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -82,3 +84,5 @@ if ! grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
     PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
     export PATH
 fi
+
+alias lg="lazygit"
