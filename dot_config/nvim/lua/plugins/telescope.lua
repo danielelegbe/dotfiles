@@ -2,13 +2,20 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.8",
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
+			"nvim-telescope/telescope-project.nvim",
+		},
 		config = function()
 			local actions = require("telescope.actions")
 			require("telescope").setup({
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
+					},
+					["project"] = {
+						require("telescope").load_extension("project"),
 					},
 				},
 				defaults = require("telescope.themes").get_dropdown({

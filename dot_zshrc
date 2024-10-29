@@ -60,6 +60,7 @@ fi
 
 eval "$(starship init zsh)"
 
+alias vim='nvim'
 alias inv='nvim $(fzf -m --preview="bat --color=always --style=numbers --line-range=:500 {}")'
 source <(fzf --zsh)
 
@@ -76,3 +77,8 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
 # Activate autosuggestions
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+if ! grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
+    PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
+    export PATH
+fi

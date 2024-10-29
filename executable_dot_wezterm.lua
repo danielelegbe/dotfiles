@@ -2,6 +2,11 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
+-- Check if on macOS
+local is_darwin = function()
+	return wezterm.target_triple:find("darwin") ~= nil
+end
+
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
@@ -18,7 +23,10 @@ config = {
 
 -- For example, changing the color scheme:
 config.color_scheme = "Catppuccin Mocha"
-config.default_domain = "WSL:Ubuntu"
+
+if not is_darwin() then
+	config.default_domain = "WSL:Ubuntu"
+end
 
 config.keys = {
 	-- paste from the clipboard
