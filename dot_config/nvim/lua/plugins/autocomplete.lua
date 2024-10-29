@@ -21,8 +21,10 @@ return {
 		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
+		"folke/lazydev.nvim",
 	},
 	config = function()
+		require("lazydev").setup({})
 		local cmp = require("cmp")
 		require("luasnip.loaders.from_vscode").lazy_load()
 		local luasnip = require("luasnip")
@@ -39,7 +41,7 @@ return {
 				end,
 			},
 			performance = {
-				max_view_entries = 10,
+				max_view_entries = 20,
 				timeout = 1,
 			},
 			window = {

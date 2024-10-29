@@ -9,7 +9,8 @@ return {
 		},
 		config = function()
 			local actions = require("telescope.actions")
-			require("telescope").setup({
+			local telescope = require("telescope")
+			telescope.setup({
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
@@ -45,7 +46,7 @@ return {
 				},
 			})
 
-			require("telescope").load_extension("ui-select")
+			telescope.load_extension("ui-select")
 
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
