@@ -21,9 +21,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", opts)
 vim.keymap.set("n", "n", "nzzzv", opts)
 vim.keymap.set("n", "N", "Nzzzv", opts)
 
-vim.keymap.set("n", "J", "5j", opts)
-vim.keymap.set("n", "K", "5k", opts)
-
 -- Jump lines faster
 
 -- Resize with arrows

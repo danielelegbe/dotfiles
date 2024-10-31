@@ -14,39 +14,43 @@ config = {
 	automatically_reload_config = true,
 	enable_tab_bar = false,
 	window_close_confirmation = "NeverPrompt",
+	window_decorations = is_darwin() and "RESIZE" or "TITLE | RESIZE",
 	default_cursor_style = "BlinkingBar",
 	font = wezterm.font("Monaspace Neon"),
 	font_size = 15.5,
+	keys = {
+		-- Clear all
+		{
+			key = "k",
+			mods = "CTRL|SHIFT",
+			action = act.ClearScrollback("ScrollbackOnly"),
+		},
+		-- paste from the clipboard
+		{ key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
+		-- paste from the primary selection
+		{ key = "v", mods = "CTRL", action = act.PasteFrom("PrimarySelection") },
+		{
+			key = "n",
+			mods = "SHIFT|CTRL",
+			action = wezterm.action.ToggleFullScreen,
+		},
+	},
+	window_padding = {
+		left = "1cell",
+		right = "1cell",
+		top = 0,
+		bottom = 0,
+	},
+	color_scheme = "Catppuccin Mocha",
 }
 
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
-config.color_scheme = "Catppuccin Mocha"
 
 if not is_darwin() then
 	config.default_domain = "WSL:Ubuntu"
 end
-
-config.keys = {
-	-- paste from the clipboard
-	{ key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
-
-	-- paste from the primary selection
-	{ key = "v", mods = "CTRL", action = act.PasteFrom("PrimarySelection") },
-	{
-		key = "n",
-		mods = "SHIFT|CTRL",
-		action = wezterm.action.ToggleFullScreen,
-	},
-}
-
-config.window_padding = {
-	left = "1cell",
-	right = "1cell",
-	top = 0,
-	bottom = 0,
-}
 
 -- and finally, return the configuration to wezterm
 return config
