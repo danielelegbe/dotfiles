@@ -149,6 +149,12 @@ return {
 			jsonls = {},
 			rust_analyzer = {},
 			prismals = {},
+			svelte = {},
+			astro = {
+				content = {
+					intellisense = true,
+				},
+			},
 		}
 		require("mason").setup()
 
