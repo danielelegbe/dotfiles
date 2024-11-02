@@ -44,12 +44,14 @@ return {
 				end,
 			},
 			performance = {
-				max_view_entries = 20,
+				max_view_entries = 30,
 				timeout = 1,
 			},
 			window = {
 				completion = cmp.config.window.bordered(),
-				documentation = cmp.config.disable,
+				documentation = {
+					border = "single",
+				},
 			},
 			snippet = {
 				expand = function(args)
@@ -121,6 +123,13 @@ return {
 				{ name = "path", max_item_count = 3 },
 				{ name = "luasnip", max_item_count = 3 },
 			}),
+		})
+
+		cmp.setup.filetype({ "sql" }, {
+			sources = {
+				{ name = "vim-dadbod-completion" },
+				{ name = "buffer" },
+			},
 		})
 	end,
 }

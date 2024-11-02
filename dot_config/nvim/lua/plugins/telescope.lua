@@ -33,15 +33,22 @@ return {
 							["<C-j>"] = actions.move_selection_next,
 							["<C-k>"] = actions.move_selection_previous,
 						},
+						n = {
+							["q"] = actions.close,
+						},
 					},
 				}),
 				pickers = {
 					buffers = {
 						mappings = {
 							n = {
-								["dd"] = actions.delete_buffer,
+								["d"] = actions.delete_buffer,
 							},
 						},
+						theme = "ivy",
+						sort_mru = true,
+						sort_lastused = true,
+						initial_mode = "normal",
 					},
 				},
 			})
