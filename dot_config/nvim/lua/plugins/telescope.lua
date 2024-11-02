@@ -15,9 +15,6 @@ return {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
 					},
-					["project"] = {
-						require("telescope").load_extension("project"),
-					},
 				},
 				defaults = require("telescope.themes").get_dropdown({
 					path_display = { "truncate" },
@@ -35,6 +32,7 @@ return {
 						},
 						n = {
 							["q"] = actions.close,
+							["v"] = actions.select_vertical,
 						},
 					},
 				}),
@@ -42,7 +40,7 @@ return {
 					buffers = {
 						mappings = {
 							n = {
-								["d"] = actions.delete_buffer,
+								["dd"] = actions.delete_buffer,
 							},
 						},
 						theme = "ivy",
@@ -68,11 +66,7 @@ return {
 				builtin.oldfiles({ prompt_title = "Recent Files" })
 			end, { desc = "Search Recent Files" })
 
-			vim.keymap.set("n", "<leader>/", function()
-				require("telescope.builtin").current_buffer_fuzzy_find({
-					prompt_title = "Search in Current Buffer",
-				})
-			end, { desc = "Search [/] in current file" })
+			vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Search [/] in current file" })
 
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 

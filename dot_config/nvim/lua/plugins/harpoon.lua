@@ -25,6 +25,9 @@ return {
 					previewer = conf.file_previewer({}),
 					sorter = conf.generic_sorter({}),
 					initial_mode = "normal",
+					actions = {
+						["dd"] = require("telescope.actions").delete_buffer,
+					},
 				})
 				:find()
 		end
