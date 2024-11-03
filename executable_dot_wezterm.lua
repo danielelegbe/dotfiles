@@ -11,6 +11,7 @@ end
 local config = wezterm.config_builder()
 
 config = {
+	max_fps = 120,
 	automatically_reload_config = true,
 	enable_tab_bar = false,
 	window_close_confirmation = "NeverPrompt",
