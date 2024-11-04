@@ -19,6 +19,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- splits default to the right
+vim.o.splitright = true
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.

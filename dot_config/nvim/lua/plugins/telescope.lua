@@ -43,7 +43,6 @@ return {
 								["dd"] = actions.delete_buffer,
 							},
 						},
-						theme = "ivy",
 						sort_mru = true,
 						sort_lastused = true,
 						initial_mode = "normal",
@@ -77,6 +76,10 @@ return {
 			vim.keymap.set("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
+
+			vim.keymap.set("n", "<leader>sr", function()
+				builtin.resume()
+			end, { desc = "[S]earch [R]esume" })
 		end,
 	},
 }

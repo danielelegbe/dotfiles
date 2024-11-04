@@ -24,6 +24,11 @@ return {
 			},
 		}
 		oil.setup(options)
-		vim.keymap.set("n", "<leader>oo", "<cmd>Oil<CR>", { silent = true, noremap = true, desc = "Open Oil" })
+		vim.keymap.set(
+			"n",
+			"<leader>oo",
+			require("oil").toggle_float,
+			{ silent = true, noremap = true, desc = "Open Oil" }
+		)
 	end,
 }
