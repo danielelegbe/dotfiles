@@ -10,6 +10,8 @@ vim.opt.showmode = false
 vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.spelllang = "en_gb"
+vim.opt.spell = true
 
 -- stops auto comments from continuing after pressing enter
 vim.api.nvim_create_autocmd("FileType", {
