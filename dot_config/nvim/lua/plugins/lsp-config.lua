@@ -155,6 +155,7 @@ return {
 					intellisense = true,
 				},
 			},
+			tailwindcss = {},
 		}
 		require("mason").setup()
 

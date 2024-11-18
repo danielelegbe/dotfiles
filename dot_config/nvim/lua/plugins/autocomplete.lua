@@ -43,6 +43,7 @@ return {
 					return vim_item
 				end,
 			},
+
 			performance = {
 				max_view_entries = 30,
 				timeout = 1,
@@ -119,8 +120,8 @@ return {
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
-				{ name = "buffer", max_item_count = 5 },
 				{ name = "path", max_item_count = 3 },
+				{ name = "buffer", max_item_count = 5 },
 				{ name = "luasnip", max_item_count = 3 },
 			}),
 		})
