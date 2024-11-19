@@ -27,6 +27,6 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "<C-e>", "<cmd>Neotree toggle reveal float<CR>:set relativenumber<CR>")
+		vim.keymap.set("n", "<C-e>", "<cmd>Neotree toggle reveal <CR>:set relativenumber<CR>")
 	end,
 }

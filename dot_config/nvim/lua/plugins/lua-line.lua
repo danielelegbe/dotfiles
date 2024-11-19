@@ -22,7 +22,7 @@ return {
 
 		require("lualine").setup({
 			options = {
-				theme = "catppuccin",
+				theme = "catppuccin-macchiato",
 				globalstatus = true,
 				component_separators = "|",
 				section_separators = { left = "", right = "" },
