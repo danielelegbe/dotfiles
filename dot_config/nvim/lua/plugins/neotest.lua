@@ -43,6 +43,7 @@ return {
 						return name ~= "node_modules"
 					end,
 				}),
+				require("rustaceanvim.neotest"),
 			},
 		})
 

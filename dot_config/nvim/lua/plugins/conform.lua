@@ -37,9 +37,11 @@ return { -- Autoformat
 			--
 			-- You can use 'stop_after_first' to run the first available formatter from the list
 			javascript = { "prettier", stop_after_first = true },
+			css = { "prettier", stop_after_first = true },
 			typescript = { "prettier", stop_after_first = true },
 			typescriptreact = { "prettier", stop_after_first = true },
 			json = { "prettier", stop_after_first = true },
+			dockerfile = { "dockerls", stop_after_first = true },
 		},
 	},
 }
