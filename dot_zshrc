@@ -99,3 +99,4 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="/home/danielelegbe/.local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

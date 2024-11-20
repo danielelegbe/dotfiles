@@ -11,14 +11,14 @@ end
 local config = wezterm.config_builder()
 
 config = {
-	max_fps = 120,
+	max_fps = 144,
 	automatically_reload_config = true,
 	enable_tab_bar = false,
 	window_close_confirmation = "NeverPrompt",
 	window_decorations = is_darwin() and "RESIZE" or "TITLE | RESIZE",
 	default_cursor_style = "BlinkingBar",
 	font = wezterm.font("Monaspace Neon"),
-	font_size = 15.5,
+	font_size = is_darwin() and 17.5 or 15.5,
 	keys = {
 		-- Clear all
 		{
