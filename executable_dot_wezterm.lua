@@ -18,7 +18,7 @@ config = {
 	window_decorations = is_darwin() and "RESIZE" or "TITLE | RESIZE",
 	default_cursor_style = "BlinkingBar",
 	font = wezterm.font("Monaspace Neon"),
-	font_size = is_darwin() and 17.5 or 15.5,
+	font_size = is_darwin() and 17 or 15.5,
 	keys = {
 		-- Clear all
 		{
@@ -42,7 +42,7 @@ config = {
 		top = 0,
 		bottom = 0,
 	},
-	color_scheme = "Catppuccin Mocha",
+	color_scheme = "Catppuccin Macchiato",
 }
 
 -- This is where you actually apply your config choices
