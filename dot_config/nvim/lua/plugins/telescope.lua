@@ -26,10 +26,8 @@ return {
 						"node_modules",
 						"dist",
 						"yarn%.lock",
-						"%-lock.json",
-						"documentation.json",
+						"package%-lock.json",
 						"pnpm%-lock.yaml",
-						"target",
 					},
 					mappings = {
 						i = {

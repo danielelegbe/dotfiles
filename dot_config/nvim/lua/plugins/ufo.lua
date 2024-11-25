@@ -60,11 +60,11 @@ function M.config()
 		return newVirtText
 	end
 
-	-- local ftMap = {
-	-- 	typescriptreact = { "lsp", "treesitter" },
-	-- 	-- python = { "indent" },
-	-- 	-- git = "",
-	-- }
+	local ftMap = {
+		-- typescriptreact = { "lsp", "treesitter" },
+		-- python = { "indent" },
+		-- git = "",
+	}
 
 	require("ufo").setup({
 		fold_virt_text_handler = handler,
@@ -73,7 +73,7 @@ function M.config()
 		provider_selector = function(bufnr, filetype, buftype)
 			-- if you prefer treesitter provider rather than lsp,
 			-- return ftMap[filetype] or {'treesitter', 'indent'}
-			return { "treesitter", "indent" }
+			return ftMap[filetype]
 			-- return { "treesitter", "indent" }
 
 			-- refer to ./doc/example.lua for detail

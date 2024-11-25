@@ -11,19 +11,15 @@ end
 local config = wezterm.config_builder()
 
 config = {
-	max_fps = 144,
+	max_fps = 120,
 	automatically_reload_config = true,
 	enable_tab_bar = false,
 	window_close_confirmation = "NeverPrompt",
 	window_decorations = is_darwin() and "RESIZE" or "TITLE | RESIZE",
 	default_cursor_style = "BlinkingBar",
 	font = wezterm.font("Monaspace Neon"),
-	font_size = is_darwin() and 17.5 or 15.5,
+	font_size = 15.5,
 	keys = {
-		{ key = "Backspace", mods = "CTRL", action = act.SendKey({ key = "w", mods = "CTRL" }) },
-		-- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
-		{ mods = "OPT", key = "LeftArrow", action = act.SendKey({ mods = "ALT", key = "b" }) },
-		{ mods = "OPT", key = "RightArrow", action = act.SendKey({ mods = "ALT", key = "f" }) },
 		-- Clear all
 		{
 			key = "k",
@@ -46,7 +42,7 @@ config = {
 		top = 0,
 		bottom = 0,
 	},
-	color_scheme = "Catppuccin Macchiato",
+	color_scheme = "Catppuccin Mocha",
 }
 
 -- This is where you actually apply your config choices
