@@ -7,6 +7,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		"marilari88/neotest-vitest",
 		"nvim-neotest/neotest-jest",
+		"rouge8/neotest-rust",
 	},
 	config = function()
 		-- Function to find the correct Vitest config file and working directory
@@ -37,6 +38,7 @@ return {
 
 		require("neotest").setup({
 			adapters = {
+				require("neotest-rust"),
 				require("neotest-jest"),
 				require("neotest-vitest")({
 					filter_dir = function(name)

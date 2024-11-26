@@ -17,6 +17,10 @@ return {
 					},
 				},
 				defaults = require("telescope.themes").get_dropdown({
+					layout_config = {
+
+						height = 20,
+					},
 					path_display = { "truncate" },
 					file_ignore_patterns = {
 						"node_modules",
@@ -55,6 +59,7 @@ return {
 			telescope.load_extension("ui-select")
 
 			local builtin = require("telescope.builtin")
+			local themes = require("telescope.themes")
 			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 
 			vim.keymap.set("n", "<leader>sf", function()
@@ -71,7 +76,13 @@ return {
 
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 
-			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+			vim.keymap.set("n", "<leader><leader>", function()
+				builtin.buffers(themes.get_ivy({
+					layout_config = {
+						height = 30,
+					},
+				}))
+			end, { desc = "[ ] Find existing buffers" })
 
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 
