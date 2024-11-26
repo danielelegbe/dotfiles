@@ -1,112 +1,136 @@
 return {
-	"saghen/blink.cmp",
+	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
-	version = "v0.*", -- REQUIRED release tag needed to download pre-built binaries
 	dependencies = {
-		"rafamadriz/friendly-snippets",
+		-- Snippet Engine & its associated nvim-cmp source
+		{
+			"L3MON4D3/LuaSnip",
+			build = (function()
+				-- Build Step is needed for regex support in snippets.
+				-- This step is not supported in many windows environments.
+				-- Remove the below condition to re-enable on windows.
+				if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
+					return
+				end
+				return "make install_jsregexp"
+			end)(),
+			dependencies = {
+				"rafamadriz/friendly-snippets",
+			},
+		},
+		"saadparwaiz1/cmp_luasnip",
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-path",
+		"folke/lazydev.nvim",
 	},
+	config = function()
+		require("lazydev").setup({})
+		local cmp = require("cmp")
+		require("luasnip.loaders.from_vscode").lazy_load()
+		local luasnip = require("luasnip")
+		luasnip.config.setup({})
 
-	---@module 'blink.cmp'
+		local neotab = require("neotab")
+		local suggestion = require("supermaven-nvim.completion_preview")
 
-	opts = {
-		highlight = {
-			-- supporting themes: tokyonight
-			-- not supported: nightfox
-			use_nvim_cmp_as_default = true,
-		},
-		sources = {
-			completion = {
-				enabled_providers = { "lsp", "path", "snippets", "buffer" },
-			},
-			providers = {
-				snippets = {
-					min_keyword_length = 1, -- don't show when triggered manually, useful for JSON keys
-					score_offset = -1,
-				},
-				path = {
-					opts = { get_cwd = vim.uv.cwd },
-				},
-				buffer = {
-					fallback_for = {}, -- disable being fallback for LSP
-					max_items = 4,
-					min_keyword_length = 4,
-					score_offset = -3,
-				},
-			},
-		},
-		keymap = {
-			["<C-space>"] = { "show" },
-			["<CR>"] = { "select_and_accept", "fallback" },
-			["<C-j>"] = { "select_next" },
-			["<C-k>"] = { "select_prev" },
-			["<C-d>"] = { "scroll_documentation_down" },
-			["<C-u>"] = { "scroll_documentation_up" },
-			["<Tab>"] = { "fallback" },
-		},
-		windows = {
-			documentation = {
-				border = vim.g.borderStyle,
-				min_width = 15,
-				max_width = 45, -- smaller, due to https://github.com/Saghen/blink.cmp/issues/194
-				max_height = 10,
-				auto_show = true,
-				auto_show_delay_ms = 250,
-			},
-			autocomplete = {
-				border = vim.g.borderStyle,
-				min_width = 10, -- max_width controlled by draw-function
-				max_height = 10,
-				cycle = { from_top = false }, -- cycle at bottom, but not at the top
-				draw = function(ctx)
-					-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/types.lua#L1-L6
-					-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/windows/autocomplete.lua#L298-L349
-					-- differentiate LSP snippets from user snippets and emmet snippets
-					local source, client = ctx.item.source_id, ctx.item.client_id
-					if client and vim.lsp.get_client_by_id(client).name == "emmet_language_server" then
-						source = "emmet"
+		cmp.setup({
+			formatting = {
+				format = function(_, vim_item)
+					if vim_item.menu ~= nil and string.len(vim_item.menu) > 20 then
+						vim_item.menu = string.sub(vim_item.menu, 1, 17) .. "..."
 					end
 
-					local sourceIcons = { snippets = "󰩫", buffer = "󰦨", emmet = "" }
-					local icon = sourceIcons[source] or ctx.kind_icon
-
-					return {
-						{
-							" " .. ctx.item.label .. " ",
-							fill = true,
-							hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
-							max_width = 40,
-						},
-						{ icon .. " ", hl_group = "BlinkCmpKind" .. ctx.kind },
-					}
+					return vim_item
 				end,
 			},
-		},
-		kind_icons = {
-			Text = "",
-			Method = "󰊕",
-			Function = "󰊕",
-			Constructor = "",
-			Field = "󰇽",
-			Variable = "󰂡",
-			Class = "󰜁",
-			Interface = "",
-			Module = "",
-			Property = "󰜢",
-			Unit = "",
-			Value = "󰎠",
-			Enum = "",
-			Keyword = "󰌋",
-			Snippet = "󰒕",
-			Color = "󰏘",
-			Reference = "",
-			File = "",
-			Folder = "󰉋",
-			EnumMember = "",
-			Constant = "󰏿",
-			Struct = "",
-			Event = "",
-			Operator = "󰆕",
-			TypeParameter = "󰅲",
-		},
-	},
+
+			performance = {
+				max_view_entries = 30,
+				timeout = 1,
+			},
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = {
+					border = "single",
+				},
+			},
+			snippet = {
+				expand = function(args)
+					luasnip.lsp_expand(args.body)
+				end,
+			},
+			completion = { completeopt = "menu,menuone,noinsert" },
+
+			-- For an understanding of why these mappings were
+			-- chosen, you will need to read `:help ins-completion`
+			--
+			-- No, but seriously. Please read `:help ins-completion`, it is really good!
+			mapping = cmp.mapping.preset.insert({
+				-- Select the [n]ext item
+				["<C-j>"] = cmp.mapping.select_next_item(),
+				-- Select the [p]revious item
+				["<C-k>"] = cmp.mapping.select_prev_item(),
+
+				-- Scroll the documentation window [b]ack / [f]orward
+				["<C-b>"] = cmp.mapping.scroll_docs(-4),
+				["<C-f>"] = cmp.mapping.scroll_docs(4),
+				-- Accept ([y]es) the completion.
+				--  This will auto-import if your LSP supports it.
+				--  This will expand snippets if the LSP sent a snippet.
+				["<CR>"] = cmp.mapping.confirm({ select = true }),
+
+				-- Manually trigger a completion from nvim-cmp.
+				--  Generally you don't need this, because nvim-cmp will display
+				--  completions whenever it has completion options available.
+				["<C-Space>"] = cmp.mapping.complete({}),
+				["<C-c>"] = cmp.mapping.abort(),
+				["<C-d>"] = cmp.mapping.scroll_docs(4),
+				["<C-u>"] = cmp.mapping.scroll_docs(-4),
+
+				--
+				-- Think of <c-l> as moving to the right of your snippet expansion.
+				--  So if you have a snippet that's like:
+				--  function $name($args)
+				--    $body
+				--  end
+				--
+				-- <c-l> will move you to the right of each of the expansion locations.
+				-- <c-h> is similar, except moving you backwards.
+				["<C-l>"] = cmp.mapping(function()
+					if luasnip.expand_or_locally_jumpable() then
+						luasnip.expand_or_jump()
+					end
+				end, { "i", "s" }),
+				["<C-h>"] = cmp.mapping(function()
+					if luasnip.locally_jumpable(-1) then
+						luasnip.jump(-1)
+					end
+				end, { "i", "s" }),
+
+				["<Tab>"] = cmp.mapping(function()
+					if suggestion.has_suggestion() then
+						suggestion.on_accept_suggestion()
+					else
+						neotab.tabout()
+					end
+				end),
+
+				-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
+				--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+			}),
+			sources = cmp.config.sources({
+				{ name = "nvim_lsp" },
+				{ name = "path", max_item_count = 3 },
+				{ name = "buffer", max_item_count = 5 },
+				{ name = "luasnip", max_item_count = 3 },
+			}),
+		})
+
+		cmp.setup.filetype({ "sql" }, {
+			sources = {
+				{ name = "vim-dadbod-completion" },
+				{ name = "buffer" },
+			},
+		})
+	end,
 }
