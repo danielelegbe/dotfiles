@@ -17,9 +17,13 @@ return {
 					},
 				},
 				defaults = require("telescope.themes").get_dropdown({
+					layout_strategy = "horizontal",
 					layout_config = {
-
-						height = 20,
+						height = 0.5,
+						prompt_position = "top",
+						width = 0.85,
+						preview_cutoff = 0.8,
+						preview_width = 0.5,
 					},
 					path_display = { "truncate" },
 					file_ignore_patterns = {
@@ -50,6 +54,7 @@ return {
 						sort_mru = true,
 						sort_lastused = true,
 						initial_mode = "normal",
+						ignore_current_buffer = true,
 					},
 				},
 			})
@@ -57,7 +62,6 @@ return {
 			telescope.load_extension("ui-select")
 
 			local builtin = require("telescope.builtin")
-			local themes = require("telescope.themes")
 			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 
 			vim.keymap.set("n", "<leader>sf", function()
@@ -74,19 +78,17 @@ return {
 
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 
-			vim.keymap.set("n", "<leader><leader>", function()
-				builtin.buffers(themes.get_ivy({
-					layout_config = {
-						height = 30,
-					},
-				}))
-			end, { desc = "[ ] Find existing buffers" })
+			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 
 			vim.keymap.set("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
+
+			vim.keymap.set("n", "<leader>sd", function()
+				builtin.find_files({ cwd = "~/.config", prompt_title = "Search Dot Files" })
+			end, { desc = "[S]earch [D]ot Files" })
 
 			vim.keymap.set("n", "<leader>sr", function()
 				builtin.resume()

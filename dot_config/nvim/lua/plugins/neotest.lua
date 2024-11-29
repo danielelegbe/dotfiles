@@ -11,6 +11,8 @@ return {
 	},
 	config = function()
 		-- Function to find the correct Vitest config file and working directory
+		local neotest = require("neotest")
+
 		local find_vitest_config_file_and_cwd = function(file)
 			if string.find(file, "/server/") then
 				return vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src") .. "vitest.config.ts",
@@ -29,10 +31,10 @@ return {
 			local config, cwd = find_vitest_config_file_and_cwd(file) -- Find the correct vitest config file and cwd
 
 			if config and vim.fn.filereadable(config) == 1 then
-				require("neotest").run.run({ extra_args = { "--config", config }, cwd = cwd })
+				neotest.run.run({ extra_args = { "--config", config }, cwd = cwd })
 			else
 				-- If config isn't found, run tests in the current working directory
-				require("neotest").run.run({ cwd = cwd })
+				neotest.run.run({ cwd = cwd, suite = true })
 			end
 		end
 

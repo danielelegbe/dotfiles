@@ -30,7 +30,6 @@ return {
 		local luasnip = require("luasnip")
 		luasnip.config.setup({})
 
-		local neotab = require("neotab")
 		local suggestion = require("supermaven-nvim.completion_preview")
 
 		cmp.setup({
@@ -110,8 +109,6 @@ return {
 				["<Tab>"] = cmp.mapping(function()
 					if suggestion.has_suggestion() then
 						suggestion.on_accept_suggestion()
-					else
-						neotab.tabout()
 					end
 				end),
 
