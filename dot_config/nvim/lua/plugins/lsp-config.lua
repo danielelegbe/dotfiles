@@ -154,7 +154,6 @@ return {
 			eslint = {},
 			prettier = {},
 			jsonls = {},
-			rust_analyzer = {},
 			prismals = {},
 			svelte = {},
 			astro = {

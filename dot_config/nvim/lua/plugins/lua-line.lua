@@ -5,16 +5,20 @@ return {
 		local harpoon = require("harpoon")
 		local noice = require("noice")
 		local function harpoon_component()
-			local total_marks = harpoon.get_marks()
+			local list = harpoon:list()
+			local total_marks = #list.items
 			if total_marks == 0 then
 				return ""
 			end
 
 			local current_mark = "-"
+			local current_file = vim.fn.bufname()
 
-			local mark_idx = harpoon.get_current_index()
-			if mark_idx == nil then
-				current_mark = tostring(mark_idx)
+			for idx, item in ipairs(list.items) do
+				if item.value == current_file then
+					current_mark = tostring(idx)
+					break
+				end
 			end
 
 			return string.format("󱡅 %s/%d", current_mark, total_marks)
@@ -22,10 +26,11 @@ return {
 
 		require("lualine").setup({
 			options = {
-				theme = "catppuccin-macchiato",
+				theme = "gruvbox-material",
 				globalstatus = true,
 				component_separators = "|",
 				section_separators = { left = "", right = "" },
+				transparent = true,
 			},
 			sections = {
 				lualine_b = {

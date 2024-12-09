@@ -10,7 +10,7 @@ return {
 		require("mini.ai").setup({ n_lines = 500 })
 		require("mini.surround").setup({
 			mappings = {
-				add = "gsa", -- Add surrounding in Normal and Visual modes
+				add = "gss", -- Add surrounding in Normal and Visual modes
 				delete = "gsd", -- Delete surrounding
 				find = "gsf", -- Find surrounding (to the right)
 				find_left = "gsF", -- Find surrounding (to the left)
