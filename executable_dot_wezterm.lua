@@ -42,7 +42,7 @@ config = {
 		top = 0,
 		bottom = 0,
 	},
-	color_scheme = "Catppuccin Mocha",
+	color_scheme = "GruvboxDark",
 }
 
 -- This is where you actually apply your config choices
