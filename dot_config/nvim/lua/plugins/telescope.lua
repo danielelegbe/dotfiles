@@ -23,8 +23,10 @@ return {
 						height = 0.5,
 						prompt_position = "top",
 						width = 0.85,
-						preview_cutoff = 0.8,
-						preview_width = 0.5,
+						preview_cutoff = 100,
+						horizontal = {
+							preview_width = 0.5,
+						},
 					},
 					path_display = { "truncate" },
 					file_ignore_patterns = {

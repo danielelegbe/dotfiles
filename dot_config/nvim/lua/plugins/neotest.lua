@@ -7,7 +7,6 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		"marilari88/neotest-vitest",
 		"nvim-neotest/neotest-jest",
-		"rouge8/neotest-rust",
 	},
 	config = function()
 		-- Function to find the correct Vitest config file and working directory
@@ -38,9 +37,8 @@ return {
 			end
 		end
 
-		require("neotest").setup({
+		neotest.setup({
 			adapters = {
-				require("neotest-rust"),
 				require("neotest-jest"),
 				require("neotest-vitest")({
 					filter_dir = function(name)
@@ -56,7 +54,11 @@ return {
 
 		-- Keymap for toggling the test summary
 		vim.keymap.set("n", "<leader>ts", function()
-			require("neotest").summary.toggle()
+			neotest.summary.toggle()
 		end, { noremap = true, silent = true, desc = "Open Test Summary" })
+
+		vim.keymap.set("n", "<leader>to", function()
+			neotest.output.open()
+		end, { noremap = true, silent = true, desc = "Open Test Output" })
 	end,
 }

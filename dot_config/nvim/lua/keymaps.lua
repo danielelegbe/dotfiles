@@ -77,5 +77,5 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', opts)
 
--- Go to previous filTRL-^
+-- Go to previous file
 vim.keymap.set("n", "gb", "<C-^>", { noremap = true, silent = true, desc = "Go back to previous file" })
