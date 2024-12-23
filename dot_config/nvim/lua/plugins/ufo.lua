@@ -102,8 +102,9 @@ function M.config()
 		local winid = require("ufo").peekFoldedLinesUnderCursor()
 		if not winid then
 			vim.lsp.buf.hover()
+			vim.diagnostic.open_float({ border = "rounded" })
 		end
-	end)
+	end, { desc = "Peek inside folds" })
 end
 
 return M

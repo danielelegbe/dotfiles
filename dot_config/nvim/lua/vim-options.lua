@@ -14,6 +14,8 @@ vim.opt.spelllang = "en_gb"
 vim.opt.spell = true
 vim.opt.termguicolors = true
 
+vim.g.neovide_cursor_animation_length = 0
+
 -- stops auto comments from continuing after pressing enter
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",

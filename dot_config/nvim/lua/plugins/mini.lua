@@ -20,5 +20,23 @@ return {
 			},
 		})
 		require("mini.indentscope").setup()
+		require("mini.files").setup({
+			mappings = {
+				reset = ",",
+				synchronize = "s",
+				reveal_cwd = ".",
+				go_in_plus = "<CR>",
+				go_in = "l",
+			},
+			windows = {
+				preview = true,
+				width_focus = 40,
+				width_preview = 40,
+			},
+		})
+
+		vim.keymap.set("n", "<leader>mf", function()
+			require("mini.files").open(vim.api.nvim_buf_get_name(0))
+		end, { desc = "Open mini.files (Current file)" })
 	end,
 }

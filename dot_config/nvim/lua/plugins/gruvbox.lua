@@ -5,7 +5,17 @@ return {
 	config = function()
 		-- Optionally configure and load the colorscheme
 		-- directly inside the plugin declaration.
-		vim.g.gruvbox_material_enable_italic = true
+		vim.g.gruvbox_material_better_performance = 1
+		vim.g.gruvbox_material_background = "hard"
+		vim.g.gruvbox_material_visual = "blue background"
+		vim.g.gruvbox_material_ui_contrast = "high"
+		vim.g.gruvbox_material_float_style = "dim"
+		vim.g.gruvbox_material_diagnostic_text_highlight = 1
+		vim.g.gruvbox_material_diagnostic_line_highlight = 1
+		vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
+		vim.g.gruvbox_material_current_word = "high contrast background"
+		vim.g.gruvbox_material_inlay_hints_background = "dimmed"
+
 		vim.cmd.colorscheme("gruvbox-material")
 	end,
 }

@@ -5,6 +5,7 @@ return {
 		local cinnamon = require("cinnamon")
 		cinnamon.setup({
 			-- Enable all provided keymaps
+			enabled = false,
 			keymaps = {
 				basic = true,
 			},

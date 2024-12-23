@@ -163,6 +163,7 @@ return {
 					intellisense = true,
 				},
 			},
+			sqls = {},
 		}
 		require("mason").setup()
 

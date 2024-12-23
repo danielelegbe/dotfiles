@@ -28,13 +28,14 @@ return {
 							preview_width = 0.5,
 						},
 					},
-					path_display = { "truncate" },
+					path_display = { "smart" },
 					file_ignore_patterns = {
 						"node_modules",
 						"dist",
 						"yarn%.lock",
 						"package%-lock.json",
 						"pnpm%-lock.yaml",
+						"tmp/*",
 					},
 					mappings = {
 						i = {
