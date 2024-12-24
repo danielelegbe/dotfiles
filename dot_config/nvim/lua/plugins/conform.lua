@@ -42,7 +42,7 @@ return { -- Autoformat
 			typescriptreact = { "prettier", stop_after_first = true },
 			json = { "prettier", stop_after_first = true },
 			dockerfile = { "dockerls", stop_after_first = true },
-			sql = { "sql-formatter", "sqlfmt", stop_after_first = true },
+			sql = { "sql-formatter", stop_after_first = true },
 		},
 	},
 }

@@ -22,20 +22,22 @@ return {
 		require("mini.indentscope").setup()
 		require("mini.files").setup({
 			mappings = {
-				reset = ",",
+				reset = "R",
 				synchronize = "s",
 				reveal_cwd = ".",
 				go_in_plus = "<CR>",
 				go_in = "l",
+				go_out = "H",
+				go_out_plus = "h",
 			},
 			windows = {
 				preview = true,
-				width_focus = 40,
+				width_focus = 50,
 				width_preview = 40,
 			},
 		})
 
-		vim.keymap.set("n", "<leader>mf", function()
+		vim.keymap.set("n", "-", function()
 			require("mini.files").open(vim.api.nvim_buf_get_name(0))
 		end, { desc = "Open mini.files (Current file)" })
 	end,

@@ -61,7 +61,10 @@ function M.config()
 	end
 
 	local ftMap = {
-		-- typescriptreact = { "lsp", "treesitter" },
+		typescriptreact = { "lsp", "treesitter" },
+		typescript = { "lsp", "treesitter" },
+		go = { "lsp", "treesitter" },
+		rust = { "lsp", "treesitter" },
 		-- python = { "indent" },
 		-- git = "",
 	}
@@ -86,8 +89,8 @@ function M.config()
 				winblend = 0,
 			},
 			mappings = {
-				scrollU = "<C-k>",
-				scrollD = "<C-j>",
+				scrollU = "<C-u>",
+				scrollD = "<C-d>",
 				jumpTop = "[",
 				jumpBot = "]",
 			},

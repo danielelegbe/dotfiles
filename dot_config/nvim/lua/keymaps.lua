@@ -16,7 +16,8 @@ vim.keymap.set("n", "x", '"_x', opts)
 vim.keymap.set("n", "n", "nzzzv", opts)
 vim.keymap.set("n", "N", "Nzzzv", opts)
 
--- Jump lines faster
+-- Yank an entire file
+vim.keymap.set("n", "vig", "ggVGy<C-o>", { desc = "Yank entire file" })
 
 -- Resize with arrows
 -- Check to see if the current window is a float window
