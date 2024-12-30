@@ -26,11 +26,9 @@ return {
 
 		require("lualine").setup({
 			options = {
-				theme = "gruvbox-material",
 				globalstatus = true,
 				component_separators = "|",
 				section_separators = { left = "", right = "" },
-				transparent = true,
 			},
 			sections = {
 				lualine_b = {
@@ -39,7 +37,9 @@ return {
 					"diff",
 					"diagnostics",
 				},
-				lualine_c = { { "filename", path = 1 } },
+				lualine_c = {
+					{ "filename", path = 1 },
+				},
 				lualine_x = {
 					{
 						noice.api.status.mode.get,

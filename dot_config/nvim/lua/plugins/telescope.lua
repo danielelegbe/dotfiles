@@ -65,6 +65,7 @@ return {
 
 			telescope.load_extension("ui-select")
 			telescope.load_extension("fzf")
+			telescope.load_extension("noice")
 
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
@@ -74,10 +75,6 @@ return {
 					prompt_title = "Live Grep in All Files",
 				})
 			end, { desc = "[S]earch in All [F]iles" })
-
-			vim.keymap.set("n", "<leader>.", function()
-				builtin.oldfiles({ prompt_title = "Recent Files" })
-			end, { desc = "Search Recent Files" })
 
 			vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Search [/] in current file" })
 

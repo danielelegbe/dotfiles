@@ -60,14 +60,6 @@ vim.keymap.set("n", "<leader>=", "<C-w>=", { silent = true, noremap = true, desc
 vim.keymap.set("n", "<leader>qw", "<C-w>q", { silent = true, noremap = true, desc = "[q]uit [w]indow" })
 vim.keymap.set("n", "<leader>qW", "<C-w>o", { silent = true, noremap = true, desc = "[q]uit Other [W]indows" })
 
--- Toggle line wrapping
-vim.keymap.set(
-	"n",
-	"<leader>lw",
-	":set wrap!<CR>",
-	{ silent = true, noremap = true, desc = "Toggle [L]ine [W]rapping" }
-)
-
 -- Stay in indent mode
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)

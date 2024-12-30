@@ -19,7 +19,6 @@ return {
 				update_n_lines = "gsn",
 			},
 		})
-		require("mini.indentscope").setup()
 		require("mini.files").setup({
 			mappings = {
 				reset = "R",

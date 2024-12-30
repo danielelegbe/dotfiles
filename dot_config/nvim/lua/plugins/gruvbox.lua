@@ -14,6 +14,6 @@ return {
 		vim.g.gruvbox_material_current_word = "high contrast background"
 		vim.g.gruvbox_material_inlay_hints_background = "dimmed"
 
-		vim.cmd.colorscheme("gruvbox-material")
+		-- vim.cmd.colorscheme("gruvbox-material")
 	end,
 }
