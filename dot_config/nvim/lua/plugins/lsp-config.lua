@@ -138,38 +138,42 @@ return {
 		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 		--  - settings (table): Override the default settings passed when initializing the server.
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-		local servers = {
-			lua_ls = {
-				settings = {
-					Lua = {
-						runtime = { version = "LuaJIT" },
-						checkThirdParty = false,
-						library = {
-							"${3rd}/luv/library",
-							unpack(vim.api.nvim_get_runtime_file("", true)),
-						},
-						completion = {
-							callSnippet = "Replace",
+		local servers =
+			{
+				lua_ls = {
+					settings = {
+						Lua = {
+							runtime = { version = "LuaJIT" },
+							checkThirdParty = false,
+							library = {
+								"${3rd}/luv/library",
+								unpack(vim.api.nvim_get_runtime_file("", true)),
+							},
+							completion = {
+								callSnippet = "Replace",
+							},
 						},
 					},
 				},
-			},
-			eslint = {},
-			prettier = {},
-			jsonls = {},
-			prismals = {},
-			svelte = {},
-			astro = {
-				content = {
-					intellisense = true,
+				eslint = {},
+				prettier = {},
+				jsonls = {},
+				prismals = {},
+				svelte = {
+					capabilities = {
+						workspace = { didChangeWatchedFiles = false },
+					},
 				},
-			},
-			sqlls = {},
-			omnisharp = {
-				cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp/libexec/Omnisharp.dll" },
-			},
-		}
-		require("mason").setup()
+				astro = {
+					content = {
+						intellisense = true,
+					},
+				},
+				sqlls = {},
+				omnisharp = {
+					cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp/libexec/Omnisharp.dll" },
+				},
+			}, require("mason").setup()
 
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
