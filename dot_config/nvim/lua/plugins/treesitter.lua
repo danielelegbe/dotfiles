@@ -7,7 +7,7 @@ return {
 			auto_install = true,
 			highlight = { enable = true },
 			indent = { enable = true },
-			ensure_installed = { "astro", "tsx", "typescript", "html" },
+			ensure_installed = { "astro", "tsx", "typescript", "html", "svelte" },
 		})
 	end,
 	ui = {

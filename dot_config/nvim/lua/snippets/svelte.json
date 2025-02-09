@@ -1,0 +1,17 @@
+{
+  "Svelte Init": {
+    "prefix": "s-script",
+    "body": ["<script lang='ts'>", "$1", "</script>", "$0"],
+    "description": "Arrrow Function"
+  },
+  "Svelte State": {
+    "prefix": "s-state",
+    "body": ["let $1 = \\$state($0)"],
+    "description": "Svelte State"
+  },
+  "Svelte Effect": {
+    "prefix": "s-effect",
+    "body": ["\\$effect(() => {", "\t$0", "})"],
+    "description": "Svelte State"
+  }
+}

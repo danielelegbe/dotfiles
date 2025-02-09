@@ -1,3 +1,23 @@
+local builtin = require("telescope.builtin")
+
+local function search_page_files()
+	builtin.find_files({
+		prompt_title = "Search Pages",
+		find_command = {
+			"rg",
+			"--files",
+			"--iglob",
+			"**/page.tsx",
+			"--iglob",
+			"**/+page.svelte",
+			"--iglob",
+			"**/+layout.svelte",
+			"--iglob",
+			"**/layout.tsx",
+		},
+	})
+end
+
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -41,6 +61,7 @@ return {
 						i = {
 							["<C-j>"] = actions.move_selection_next,
 							["<C-k>"] = actions.move_selection_previous,
+							["<C-y>"] = actions.select_default,
 						},
 						n = {
 							["q"] = actions.close,
@@ -65,9 +86,7 @@ return {
 
 			telescope.load_extension("ui-select")
 			telescope.load_extension("fzf")
-			telescope.load_extension("noice")
 
-			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 
 			vim.keymap.set("n", "<leader>sf", function()
@@ -84,8 +103,10 @@ return {
 
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 
+			vim.keymap.set("n", "<leader>sp", search_page_files, { desc = "[S]earch [P]age [F]iles" })
+
 			vim.keymap.set("n", "<leader>sn", function()
-				builtin.find_files({ cwd = vim.fn.stdpath("config") })
+				builtin.find_files({ cwd = vim.fn.stdpath("config"), prompt_title = "Search Plugins" })
 			end, { desc = "[S]earch [N]eovim files" })
 
 			vim.keymap.set("n", "<leader>sd", function()

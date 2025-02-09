@@ -28,6 +28,7 @@ return {
 				go_in = "l",
 				go_out = "H",
 				go_out_plus = "h",
+				close = "q",
 			},
 			windows = {
 				preview = true,

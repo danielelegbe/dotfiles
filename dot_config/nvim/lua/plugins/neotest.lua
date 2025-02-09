@@ -1,3 +1,15 @@
+local find_vitest_config_file_and_cwd = function(file)
+	if string.find(file, "/server/") then
+		return vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src") .. "vitest.config.ts",
+			vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src")
+	elseif string.find(file, "/client/") then
+		return vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src") .. "vite.config.ts",
+			vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src")
+	else
+		return nil, vim.fn.getcwd() -- Return current working directory if not in client/server
+	end
+end
+
 return {
 	"nvim-neotest/neotest",
 	dependencies = {
@@ -7,22 +19,11 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		"marilari88/neotest-vitest",
 		"nvim-neotest/neotest-jest",
+		"nvim-neotest/neotest-go",
 	},
 	config = function()
 		-- Function to find the correct Vitest config file and working directory
 		local neotest = require("neotest")
-
-		local find_vitest_config_file_and_cwd = function(file)
-			if string.find(file, "/server/") then
-				return vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src") .. "vitest.config.ts",
-					vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src")
-			elseif string.find(file, "/client/") then
-				return vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src") .. "vite.config.ts",
-					vim.fn.fnamemodify(file, ":h"):match("(.-/[^/]+/)src")
-			else
-				return nil, vim.fn.getcwd() -- Return current working directory if not in client/server
-			end
-		end
 
 		-- Helper to run tests with dynamic Vitest config file and working directory
 		local run_tests = function()
@@ -33,13 +34,14 @@ return {
 				neotest.run.run({ extra_args = { "--config", config }, cwd = cwd })
 			else
 				-- If config isn't found, run tests in the current working directory
-				neotest.run.run({ cwd = cwd, suite = true })
+				neotest.run.run()
 			end
 		end
 
 		neotest.setup({
 			adapters = {
 				require("neotest-jest"),
+				require("neotest-go"),
 				require("neotest-vitest")({
 					filter_dir = function(name)
 						return name ~= "node_modules"

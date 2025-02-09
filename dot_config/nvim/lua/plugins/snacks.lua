@@ -1,30 +1,38 @@
----@diagnostic disable: undefined-global
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
-	---@type snacks.Config
 	opts = {
-		animate = { enabled = true },
+		animate = { enabled = true, fps = 120 },
 		bigfile = { enabled = true },
 		indent = { enabled = true },
-		input = { enabled = true },
 		rename = { enabled = true },
+		dashboard = { enabled = true },
+
 		notifier = {
 			enabled = true,
 			timeout = 2000,
 		},
 		quickfile = { enabled = true },
-		scroll = { enabled = true },
+		scroll = {
+			enabled = true,
+		},
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
 		styles = {
 			notification = {
-				-- wo = { wrap = true } -- Wrap notifications
+				wo = { wrap = true }, -- Wrap notifications
 			},
 		},
 	},
 	keys = {
+		{
+			"<leader>bd",
+			function()
+				Snacks.bufdelete()
+			end,
+			desc = "Delete Buffer",
+		},
 		{
 			"<leader>z",
 			function()
@@ -66,14 +74,6 @@ return {
 				Snacks.rename.rename_file()
 			end,
 			desc = "Rename File",
-		},
-		{
-			"<leader>gB",
-			function()
-				Snacks.gitbrowse()
-			end,
-			desc = "Git Browse",
-			mode = { "n", "v" },
 		},
 		{
 			"<leader>gb",
@@ -144,6 +144,13 @@ return {
 		},
 	},
 	init = function()
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "MiniFilesActionRename",
+			callback = function(event)
+				Snacks.rename.on_rename_file(event.data.from, event.data.to)
+			end,
+		})
+
 		vim.api.nvim_create_autocmd("User", {
 			pattern = "VeryLazy",
 			callback = function()

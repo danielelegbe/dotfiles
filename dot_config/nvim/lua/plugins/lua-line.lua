@@ -35,6 +35,7 @@ return {
 					{ "branch", icon = "" },
 					harpoon_component,
 					"diff",
+
 					"diagnostics",
 				},
 				lualine_c = {
@@ -42,7 +43,9 @@ return {
 				},
 				lualine_x = {
 					{
+						---@diagnostic disable-next-line: undefined-field
 						noice.api.status.mode.get,
+						---@diagnostic disable-next-line: undefined-field
 						cond = noice.api.status.mode.has,
 						color = { fg = "#ff9e64" },
 					},

@@ -17,7 +17,7 @@ vim.keymap.set("n", "n", "nzzzv", opts)
 vim.keymap.set("n", "N", "Nzzzv", opts)
 
 -- Yank an entire file
-vim.keymap.set("n", "vig", "ggVGy<C-o>", { desc = "Yank entire file" })
+vim.keymap.set("n", "vig", "ggyG<C-o>", { desc = "Yank entire file" })
 
 -- Resize with arrows
 -- Check to see if the current window is a float window
@@ -69,3 +69,13 @@ vim.keymap.set("v", "p", '"_dP', opts)
 
 -- Go to previous file
 vim.keymap.set("n", "gb", "<C-^>", { noremap = true, silent = true, desc = "Go back to previous file" })
+
+vim.keymap.set("n", "K", function()
+	local winid = require("ufo").peekFoldedLinesUnderCursor()
+	if not winid then
+		vim.lsp.buf.hover()
+		vim.diagnostic.open_float({ border = "rounded" })
+	end
+end, { desc = "Hover" })
+
+vim.keymap.set("n", "<leader>gB", "<Cmd>GitBlameOpenFileURL<CR>", { desc = "Open File URL" })
