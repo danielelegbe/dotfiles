@@ -33,11 +33,6 @@ COLOR_GIT=$'%F{39}'
 setopt PROMPT_SUBST
 export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF} $ '
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-
-
-alias nvim='nvim --listen /tmp/nvim-server.pipe'
 
 # neovim-remote
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
@@ -64,6 +59,8 @@ alias inv='nvim $(fzf -m --preview="bat --color=always --style=numbers --line-ra
 # fzf
 eval "$(starship init zsh)"
 source <(fzf --zsh)
+#zoxide
+eval "$(zoxide init --cmd cd zsh)"
 
 
 
@@ -72,10 +69,6 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
-# Change colors
-# export ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=blue
-# export ZSH_HIGHLIGHT_STYLES[precommand]=fg=blue
-# export ZSH_HIGHLIGHT_STYLES[arg0]=fg=blue
 
 # Activate autosuggestions
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -87,7 +80,6 @@ fi
 
 alias lg="lazygit"
 
-eval "$(zoxide init --cmd cd zsh)"
 
 
 # sst
@@ -104,3 +96,8 @@ fi
 if [ -f "$HOME/.secrets/api_keys" ]; then
     source "$HOME/.secrets/api_keys"
 fi
+
+alias sc='sesh connect $(sesh list | fzf)'
+
+
+
