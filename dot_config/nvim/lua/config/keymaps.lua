@@ -21,13 +21,7 @@ vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 vim.keymap.set("n", "<leader><leader>", function()
   Snacks.picker.buffers({
     focus = "list",
-    layout = {
-      preview = false,
-      layout = {
-        max_width = 80,
-        max_height = 10,
-      },
-    },
+    layout = "vscode"
   })
 end, { desc = "Open buffers" })
 
