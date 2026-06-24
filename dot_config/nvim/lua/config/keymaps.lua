@@ -4,9 +4,6 @@
 
 -- File picker with Ctrl+P (includes hidden files)
 -- Press Alt+H within the picker to toggle hidden files visibility
-vim.keymap.set("n", "<C-p>", function()
-  Snacks.picker.files({ cwd = true })
-end, { desc = "Find Files (including hidden)" })
 
 -- Search in current buffer with Space+/
 vim.keymap.set("n", "<leader>/", function()
@@ -21,7 +18,7 @@ vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 vim.keymap.set("n", "<leader><leader>", function()
   Snacks.picker.buffers({
     focus = "list",
-    layout = "vscode"
+    layout = "vscode",
   })
 end, { desc = "Open buffers" })
 
